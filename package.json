@@ -26,5 +26,9 @@
     "test": "jest",
     "test:watch": "jest --watchAll",
     "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   }
 }
