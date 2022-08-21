@@ -19,5 +19,5 @@ jobs:
       run: yarn lint
     - name: Check type compilation with TypeScript
       run: yarn type-check
-    - name: Run tests with Jest
-      run: yarn test
+    # - name: Run tests with Jest
+    #   run: yarn test
