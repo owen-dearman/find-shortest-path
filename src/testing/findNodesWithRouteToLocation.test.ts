@@ -1,4 +1,4 @@
-import { findNodesWithRouteToLocation } from "../findPointsAlongShortestRoute";
+import { findNodesWithRouteToLocation } from "../6.findPointsAlongShortestRoute";
 
 const testMap = {
   WATFORD: {

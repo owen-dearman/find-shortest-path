@@ -1,6 +1,6 @@
-import { convertCSVtoJS } from "./convertCSVtoJS";
-import { createListOfTiplocs } from "./createListOfTiplocs";
-import { getShortestRoute } from "./getShortestRoute";
+import { convertCSVtoJS } from "./2.convertCSVtoJS";
+import { createListOfTiplocs } from "./3.createListOfTiplocs";
+import { getShortestRoute } from "./4.getShortestRoute";
 import { Railway, Route, ShortestRoute } from "./typing";
 
 /**

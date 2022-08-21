@@ -1,3 +1,3 @@
-import { createRailwayMap } from "../createRailwayMap";
+import { createRailwayMap } from "../1.createRailwayMap";
 
 export const map = createRailwayMap();

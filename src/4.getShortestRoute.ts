@@ -1,7 +1,7 @@
 import { Route } from "./typing";
-import { findPointsAlongShortestRoute } from "./findPointsAlongShortestRoute";
+import { findPointsAlongShortestRoute } from "./6.findPointsAlongShortestRoute";
 import { RailwayMap, ShortestRoute } from "./typing";
-import { buildMapFromOrigin } from "./buildGraph";
+import { buildMapFromOrigin } from "./5.buildGraph";
 
 export function getShortestRoute(
   origin: string,

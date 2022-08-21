@@ -1,4 +1,4 @@
-import { smallestWeight } from "../getShortestRoute";
+import { smallestWeight } from "../4.getShortestRoute";
 
 const testMap = {
   WATFORD: {

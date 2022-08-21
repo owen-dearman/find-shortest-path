@@ -1,4 +1,4 @@
-import { createListOfTiplocs } from "../createListOfTiplocs";
+import { createListOfTiplocs } from "../3.createListOfTiplocs";
 
 describe("suite of tests for createListOfTiplocs", () => {
   test("array of tiploc names is returned", () => {

@@ -1,4 +1,4 @@
-import { filterForOnwardsRoutes } from "../buildGraph";
+import { filterForOnwardsRoutes } from "../5.buildGraph";
 import { Route } from "../typing";
 
 const testMap: Route[] = [
