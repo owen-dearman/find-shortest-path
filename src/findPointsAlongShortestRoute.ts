@@ -8,11 +8,13 @@ export function findPointsAlongShortestRoute(
   let nodesOnRoute: string[] = [];
   let currentNode = end;
   while (currentNode !== start) {
+    console.log({ currentNode, onwards: nodes[currentNode].routes })
     nodesOnRoute.push(currentNode);
     let minWeight = Infinity;
     for (const route of nodes[currentNode].routes) {
       //current onwards route's distance from origin + the distance to that routes destination
       const cumulativeWeight = route.weight + nodes[route.destination].weight;
+      console.log({ tiploc: route.destination, weight: cumulativeWeight })
       //pick the shortest onwards route from the origin each time
       if (cumulativeWeight < minWeight) {
         minWeight = cumulativeWeight;

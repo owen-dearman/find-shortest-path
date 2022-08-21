@@ -45,7 +45,8 @@ export function getShortestRoute(
     nodes,
   );
   return {
-    distance: (distanceToDestination - numTracks) * 0.001,
+    distance: parseFloat(((distanceToDestination - numTracks) * 0.001).toFixed(3)),
+    // distance: distanceToDestination * 0.001,
     nodes: nodesOnRoute,
     numTracks: numTracks,
   };

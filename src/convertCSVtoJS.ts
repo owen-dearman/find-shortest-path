@@ -21,17 +21,10 @@ export function convertCSVtoJS(fileName: string): Route[] {
       const data = {
         originStation: arrayOfValues[0],
         destinationStation: arrayOfValues[1],
-        distance: parseInt(arrayOfValues[2]) + 1,
+        distance: parseFloat(arrayOfValues[2]),
       };
-      const duplicates = dataArr.filter(
-        (n) =>
-          n.destinationStation === data.destinationStation &&
-          n.originStation === data.originStation &&
-          n.distance === data.distance,
-      );
-      if (duplicates.length < 1) {
-        dataArr.push(data);
-      }
+      dataArr.push(data);
+
     }
   }
   return dataArr;

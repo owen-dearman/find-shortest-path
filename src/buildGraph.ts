@@ -29,31 +29,31 @@ function createDefaultMap(data: Route[]) {
     arrayOfOnwardsRoutes.forEach((route) => {
       routeDestinations.push({
         destination: route.destinationStation,
-        weight: route.distance,
+        weight: route.distance + 1,
       });
     });
     //create a node in the graph for each data point, containing its name, connected nodes, and a default distance from the origin
     mapOfRoutes[node.originStation] = {
       name: node.originStation,
-      // routes: removeDuplicates(routeDestinations),
-      routes: routeDestinations,
+      routes: removeDuplicates(routeDestinations),
+      // routes: routeDestinations,
       weight: 1,
     };
   }
   return mapOfRoutes;
 }
 
-// function removeDuplicates(nodes: OnwardsRoute[]): OnwardsRoute[] {
-//   const reducedNodeArr: OnwardsRoute[] = [];
-//   for (const n of nodes) {
-//     if (
-//       reducedNodeArr.filter((x) => x.destination === n.destination).length < 1
-//     ) {
-//       reducedNodeArr.push(n);
-//     }
-//   }
-//   return reducedNodeArr;
-// }
+function removeDuplicates(nodes: OnwardsRoute[]): OnwardsRoute[] {
+  const reducedNodeArr: OnwardsRoute[] = [];
+  for (const n of nodes) {
+    if (
+      reducedNodeArr.filter((x) => x.destination === n.destination).length < 1
+    ) {
+      reducedNodeArr.push(n);
+    }
+  }
+  return reducedNodeArr;
+}
 
 function filterForOnwardsRoutes(
   currentStation: Route,
@@ -63,10 +63,9 @@ function filterForOnwardsRoutes(
   //return array of stations with a starting point or ending point of the same name as the current station
   const onwardsRoutes = databaseOfStations.filter(
     (track) =>
-      track.originStation === currentStationName ||
-      track.destinationStation === currentStationName,
+      track.originStation === currentStationName
   );
-
+  // || track.destinationStation === currentStationName,
   const formattedReturnRoutes = formatReturnRoutes(
     onwardsRoutes,
     currentStationName,
