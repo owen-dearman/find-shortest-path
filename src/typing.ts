@@ -2,7 +2,10 @@ export interface Railway {
   getNumTiplocs: () => number;
   getNumRoutes: () => number;
   getListOfTiplocs: () => string[];
-  findShortestRoute: (arg0: string, arg1: string) => ShortestRoute;
+  findShortestRoute: (
+    arg0: string,
+    arg1: string,
+  ) => ShortestRoute | TiplocError;
 }
 
 export type RailwayMap = {
@@ -18,4 +21,9 @@ export type ShortestRoute = {
   distance: number;
   nodes: string[];
   numTracks: number;
+};
+
+export type TiplocError = {
+  message: "Origin or Destination TIPLOC Not Found";
+  fault: string;
 };

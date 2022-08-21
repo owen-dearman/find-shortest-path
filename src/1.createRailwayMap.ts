@@ -1,7 +1,7 @@
 import { convertCSVtoJS } from "./2.convertCSVtoJS";
 import { createListOfTiplocs } from "./3.createListOfTiplocs";
 import { getShortestRoute } from "./4.getShortestRoute";
-import { Railway, Route, ShortestRoute } from "./typing";
+import { Railway, Route, ShortestRoute, TiplocError } from "./typing";
 
 /**
  *
@@ -34,12 +34,23 @@ export function createRailwayMap(): Railway {
   function findShortestRoute(
     origin: string,
     destination: string,
-  ): ShortestRoute {
-    return getShortestRoute(
-      origin.toUpperCase(),
-      destination.toUpperCase(),
-      railwayData,
-    );
+  ): ShortestRoute | TiplocError {
+    const originTiplocExist = tiplocArr.includes(origin);
+    const destinationTiplocExist = tiplocArr.includes(destination);
+    if (originTiplocExist && destinationTiplocExist) {
+      return getShortestRoute(
+        origin.toUpperCase(),
+        destination.toUpperCase(),
+        railwayData,
+      );
+    } else {
+      return !originTiplocExist
+        ? { message: "Origin or Destination TIPLOC Not Found", fault: origin }
+        : {
+            message: "Origin or Destination TIPLOC Not Found",
+            fault: destination,
+          };
+    }
   }
 
   return {

@@ -430,6 +430,13 @@ describe("suite of tests for findShortestRoute", () => {
       ],
       numTracks: 320,
     });
-    //   expect(map.findShortestRoute("GRSTH", "WATFDJ")).toStrictEqual({ distance: 2.635, nodes: ["GRSTH", "WATFDN", "WATFDJ"], numTracks: 2 })
+    expect(map.findShortestRoute("OWEN", "WARE")).toStrictEqual({
+      message: "Origin or Destination TIPLOC Not Found",
+      fault: "OWEN",
+    });
+    expect(map.findShortestRoute("WARE", "OWEN")).toStrictEqual({
+      message: "Origin or Destination TIPLOC Not Found",
+      fault: "OWEN",
+    });
   });
 });
