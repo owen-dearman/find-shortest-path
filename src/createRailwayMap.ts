@@ -1,36 +1,51 @@
 import { convertCSVtoJS } from "./convertCSVtoJS";
-import { createListOfStations } from "./createListOfStations";
+import { createListOfTiplocs } from "./createListOfTiplocs";
 import { getShortestRoute } from "./getShortestRoute";
 import { Railway, Route, ShortestRoute } from "./typing";
 
-export function createRailwayMap(): Railway {
-  //pull in the data
-  const railwayData: Route[] = convertCSVtoJS("tracks.csv");
-  const stationArr = createListOfStations(railwayData);
+/**
+ *
+ * @returns functions as the basis of querying the railway infratsructure
+ */
 
+export function createRailwayMap(): Railway {
+  //pull in the data from the CSV file. In this way, this step only has to be done once for multiple searches.
+  const railwayData: Route[] = convertCSVtoJS("tracks.csv");
+
+  //returns list of unique TIPLOCs in alphabetical order
+  const tiplocArr = createListOfTiplocs(railwayData);
+
+  //number of routes in the data
   function getNumRoutes(): number {
     return railwayData.length;
   }
 
-  function getListOfStations(): string[] {
-    return stationArr;
+  //list of all TIPLOCs in the data
+  function getListOfTiplocs(): string[] {
+    return tiplocArr;
   }
 
-  function getNumStations(): number {
-    return stationArr.length;
+  //number of TIPLOCS in the data
+  function getNumTiplocs(): number {
+    return tiplocArr.length;
   }
 
+  //return the shortest route between two TIPLOCS
   function findShortestRoute(
     origin: string,
     destination: string,
   ): ShortestRoute {
-    return getShortestRoute(origin, destination, railwayData);
+    return getShortestRoute(
+      origin.toUpperCase(),
+      destination.toUpperCase(),
+      railwayData,
+    );
   }
 
   return {
     getNumRoutes,
-    getListOfStations,
-    getNumStations,
+    getListOfTiplocs,
+    getNumTiplocs,
     findShortestRoute,
   };
 }

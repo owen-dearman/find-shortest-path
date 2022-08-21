@@ -1,25 +1,18 @@
 export interface Railway {
-  getNumStations: () => number;
+  getNumTiplocs: () => number;
   getNumRoutes: () => number;
-  getListOfStations: () => string[];
+  getListOfTiplocs: () => string[];
   findShortestRoute: (arg0: string, arg1: string) => ShortestRoute;
 }
 
-export type Route = {
-  originStation: string;
-  destinationStation: string;
-  distance: number;
-};
-
-export type RouteMap = {
+export type RailwayMap = {
   [key: string]: {
-    name: string;
-    routes: OnwardsRoute[];
+    routes: Route[];
     weight: number;
   };
 };
 
-export type OnwardsRoute = { destination: string; weight: number };
+export type Route = { origin: string; destination: string; distance: number };
 
 export type ShortestRoute = {
   distance: number;

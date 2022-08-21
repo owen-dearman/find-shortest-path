@@ -1,29 +1,50 @@
-import { RouteMap } from "./typing";
+import { Route, RailwayMap } from "./typing";
 
 export function findPointsAlongShortestRoute(
   start: string,
   end: string,
-  nodes: RouteMap,
+  nodes: RailwayMap,
 ): { nodesOnRoute: string[]; numTracks: number } {
   let nodesOnRoute: string[] = [];
   let currentNode = end;
   while (currentNode !== start) {
-    console.log({ currentNode, onwards: nodes[currentNode].routes })
+    /*NB. The graph is uni-directional, and so we can't trace a route from detsination->onwardsRoute to origin because the route may not exist.
+    Instead, we find all nodes which have a route to destination, and calculate the distance of their origin + distance to destination. Then we set currentNode to origin
+    */
     nodesOnRoute.push(currentNode);
     let minWeight = Infinity;
-    for (const route of nodes[currentNode].routes) {
-      //current onwards route's distance from origin + the distance to that routes destination
-      const cumulativeWeight = route.weight + nodes[route.destination].weight;
-      console.log({ tiploc: route.destination, weight: cumulativeWeight })
-      //pick the shortest onwards route from the origin each time
+    //find nodes with a route to currentNode
+    const routesToCurrentNode = findNodesWithRouteToLocation(
+      currentNode,
+      nodes,
+    );
+    for (const route of routesToCurrentNode) {
+      const cumulativeWeight = route.distance + nodes[route.origin].weight;
+      //if distance from journey origin is shorter, then set that as the next node in route
       if (cumulativeWeight < minWeight) {
         minWeight = cumulativeWeight;
-        currentNode = route.destination;
+        currentNode = route.origin;
       }
     }
   }
   const numTracks = nodesOnRoute.length;
+  //add the starting station to the route as the while loop is not activated
   nodesOnRoute.push(start);
+  //reverse the list so origin is at the start and destination at the end
   nodesOnRoute = nodesOnRoute.reverse();
   return { nodesOnRoute: nodesOnRoute, numTracks: numTracks };
+}
+
+export function findNodesWithRouteToLocation(
+  location: string,
+  nodes: RailwayMap,
+): Route[] {
+  const routes: Route[] = [];
+  for (const key in nodes) {
+    const currentNodeRoutes = nodes[key].routes;
+    for (const route of currentNodeRoutes) {
+      route.destination === location && routes.push(route);
+    }
+  }
+  return routes;
 }

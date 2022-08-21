@@ -19,12 +19,20 @@ export function convertCSVtoJS(fileName: string): Route[] {
     if (arrayOfValues !== undefined) {
       //add 1 to the distance to avoid 0 distance errors
       const data = {
-        originStation: arrayOfValues[0],
-        destinationStation: arrayOfValues[1],
+        origin: arrayOfValues[0],
+        destination: arrayOfValues[1],
         distance: parseFloat(arrayOfValues[2]),
       };
-      dataArr.push(data);
-
+      //only push if there are no duplicates in the array already
+      const duplicates = dataArr.filter(
+        (dataPoint) =>
+          dataPoint.destination === data.destination &&
+          dataPoint.origin === data.origin &&
+          dataPoint.distance === data.distance,
+      );
+      if (duplicates.length < 1) {
+        dataArr.push(data);
+      }
     }
   }
   return dataArr;
