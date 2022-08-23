@@ -47,9 +47,9 @@ export function createRailwayMap(): Railway {
       return !originTiplocExist
         ? { message: "Origin or Destination TIPLOC Not Found", fault: origin }
         : {
-          message: "Origin or Destination TIPLOC Not Found",
-          fault: destination,
-        };
+            message: "Origin or Destination TIPLOC Not Found",
+            fault: destination,
+          };
     }
   }
 
