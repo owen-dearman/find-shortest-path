@@ -1,4 +1,4 @@
-import { smallestWeight } from "../4.getShortestRoute";
+import { smallestWeight } from "../4.CalculateShortestPathBetweeNodes";
 
 const testMap = {
   WATFORD: {
