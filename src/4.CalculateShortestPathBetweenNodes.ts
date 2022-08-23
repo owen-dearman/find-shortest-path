@@ -3,7 +3,7 @@ import { findPointsAlongShortestRoute } from "./6.findPointsAlongShortestRoute";
 import { RailwayMap, ShortestRoute } from "./typing";
 import { buildMapFromOrigin } from "./5.buildGraph";
 
-export function CalculateShortestPathBetweeNodes(
+export function CalculateShortestPathBetweenNodes(
   origin: string,
   destination: string,
   data: Route[],
