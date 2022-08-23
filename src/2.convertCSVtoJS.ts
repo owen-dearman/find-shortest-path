@@ -4,7 +4,7 @@ import { Route } from "./typing";
 
 export function convertCSVtoJS(fileName: string): Route[] {
   const filePath = path.join(__dirname, fileName);
-  const csvArray = readFileSync(filePath).toString().split("\r\n");
+  const csvArray = readFileSync(filePath).toString().split(/\r?\n/);
 
   //create empty array for data
   const dataArr: Route[] = [];
